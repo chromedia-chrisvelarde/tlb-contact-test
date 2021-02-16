@@ -1,0 +1,4 @@
+#api_contacts:
+#  resource: "@ApiBundle\Controller\V1\ContactController"
+#  prefix: 'contacts'
+#  name_prefix: api.contacts.

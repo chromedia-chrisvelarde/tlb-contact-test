@@ -1,3 +1,33 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+contact_list:
+  path: /api/v1/contacts
+  controller: App\ApiBundle\Controller\ContactController::index
+  methods: [GET]
+
+contact_create:
+  path: /api/v1/contacts
+  controller: App\ApiBundle\Controller\ContactController::create
+  methods: [POST]
+
+contact_show:
+  path: /api/v1/contacts/{id}
+  controller: App\ApiBundle\Controller\ContactController::show
+  methods: [GET]
+  requirements:
+    id: '\d+'
+
+contact_update:
+  path: /api/v1/contacts/{id}
+  controller: App\ApiBundle\Controller\ContactController::update
+  methods: [PATCH, PUT]
+  requirements:
+    id: '\d+'
+
+contact_delete:
+  path: /api/v1/contacts/{id}
+  controller: App\ApiBundle\Controller\ContactController::delete
+  methods: [DELETE]
+  requirements:
+    id: '\d+'
