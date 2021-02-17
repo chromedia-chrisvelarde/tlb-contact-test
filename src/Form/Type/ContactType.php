@@ -9,6 +9,7 @@
 namespace App\Form\Type;
 
 use App\Entity\Contact;
+use App\Validator\Constraints\Recaptcha;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,7 +43,16 @@ class ContactType extends AbstractType
                     new NotNull(['message' => 'Email should not be blank.']),
                     new Email(['message' => 'Invalid Email format.']),
                 ]
+            ])
+        ;
+
+        if (!empty($options['recaptchaAction'])) {
+            $builder->add('recaptcha', TextType::class, [
+                'constraints' => [
+                    new Recaptcha(['action' => $options['recaptchaAction']])
+                ]
             ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
