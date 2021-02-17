@@ -9,5 +9,6 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     FOS\RestBundle\FOSRestBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
-    App\ApiBundle\ApiBundle::class => ['all' => true],
+    Ajgarlag\Bundle\PsrHttpMessageBundle\AjgarlagPsrHttpMessageBundle::class => ['all' => true],
+    Trikoder\Bundle\OAuth2Bundle\TrikoderOAuth2Bundle::class => ['all' => true],
 ];
