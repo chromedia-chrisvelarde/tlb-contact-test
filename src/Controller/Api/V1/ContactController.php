@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @FOSRest\Route("/api/v1/contacts", name="contacts")
+ * @FOSRest\Route("/api/v1/contact", name="contact")
  */
 class ContactController extends AbstractFOSRestController
 {
@@ -63,7 +63,7 @@ class ContactController extends AbstractFOSRestController
      * @return Response
      *
      */
-    public function getContacts()
+    public function cgetContacts()
     {
         return $this->handleView($this->view([ 'contacts' => $this->contactManager->getAll()], Response::HTTP_OK));
     }
