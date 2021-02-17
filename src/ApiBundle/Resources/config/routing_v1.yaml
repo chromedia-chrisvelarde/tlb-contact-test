@@ -1,0 +1,5 @@
+api_contacts:
+  resource: App\ApiBundle\Controller\V1\ContactController
+  type: annotation
+  prefix: 'contacts'
+  name_prefix: 'api_contacts_'
