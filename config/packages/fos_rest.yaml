@@ -2,6 +2,9 @@
 fos_rest:
     body_listener:
         enabled: true
+    param_fetcher_listener:
+        enabled: true
+        force: true
 #    param_fetcher_listener:  true
 #    allowed_methods_listener:  true
 #    routing_loader: true

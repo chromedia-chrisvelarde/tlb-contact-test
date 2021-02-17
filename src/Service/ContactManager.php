@@ -59,4 +59,14 @@ class ContactManager extends BaseManager
 
         return $contact;
     }
+
+    /**
+     * Get All Contacts
+     *
+     * @return Contact[]
+     */
+    public function getAll()
+    {
+        return $this->repository->findAll();
+    }
 }

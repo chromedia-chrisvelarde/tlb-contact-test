@@ -6,7 +6,7 @@
  * Time: 17:03
  */
 
-namespace App\ApiBundle\Controller\V1;
+namespace App\Controller\Api\V1;
 
 use App\Service\ContactManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
