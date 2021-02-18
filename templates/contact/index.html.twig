@@ -12,6 +12,19 @@
             <h1 class="h3 mb-3 font-weight-normal">Contact Me</h1>
             <p>... will Contact You</p>
         </div>
+
+        {% for error_message in app.flashes('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% endfor %}
+
+        {% for success_message in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ success_message }}
+            </div>
+        {% endfor %}
+
         <div class="form-label-group">
             {{ form_widget(form.fname, {attr: {class: 'form-control', placeholder: 'First Name',autocomplete: 'off'}} ) }}
             {{ form_errors(form.fname) }}
