@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ContactController extends AbstractController
 {
-
     /**
      * @var ContactManager $contactManager
      */
@@ -23,7 +22,6 @@ class ContactController extends AbstractController
 
     /**
      * @param ContactManager $contactManager
-     * @param FormInterface $formFactory
      */
     public function __construct(ContactManager $contactManager)
     {
@@ -42,7 +40,8 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()){
-                $this->contactManager->create($form->getData());
+                $contact = $form->getData();
+                $this->contactManager->sendEmail($contact)->create($contact);
             }
         }
 
