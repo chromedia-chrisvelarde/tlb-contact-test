@@ -9,13 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Exception\MailerException;
 
 /**
  * @Route("/contact", name="contact")
  */
 class ContactController extends AbstractController
 {
-
     /**
      * @var ContactManager $contactManager
      */
@@ -23,7 +23,6 @@ class ContactController extends AbstractController
 
     /**
      * @param ContactManager $contactManager
-     * @param FormInterface $formFactory
      */
     public function __construct(ContactManager $contactManager)
     {
@@ -42,7 +41,19 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()){
-                $this->contactManager->create($form->getData());
+                $formData = $form->getData();
+                $contact = null;
+                try {
+                    $contact = $this->contactManager->sendEmail($formData)->create($formData);
+                } catch (MailerException $e) {
+                    $this->addFlash('error', "Error Sending Email: {$e->getMessage()}");
+                }
+
+                if (null != $contact) {
+                    $this->addFlash('success', "Contact Sent!");
+                    return $this->redirectToRoute('contact_post_contact');
+                }
+
             }
         }
 
