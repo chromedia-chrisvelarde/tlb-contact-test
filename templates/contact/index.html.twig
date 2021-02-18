@@ -2,6 +2,63 @@
 
 {% block title %}Contact Form{% endblock %}
 
+{% set rand = random() %}
+
 {% block body %}
-    {{ form(form) }}
+
+    {{ form_start(form, {'action': path('contact_post_contact'), 'method': 'POST', 'attr': {'class': 'form-contact'}}) }}
+
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Contact Me</h1>
+            <p>... will Contact You</p>
+        </div>
+        <div class="form-label-group">
+            {{ form_widget(form.fname, {attr: {class: 'form-control', placeholder: 'First Name',autocomplete: 'off'}} ) }}
+            {{ form_errors(form.fname) }}
+            <label for="contact_fname">First Name</label>
+        </div>
+
+        <div class="form-label-group">
+            {{ form_widget(form.lname, {attr: {class: 'form-control', placeholder: 'Last Name',autocomplete: 'off'}} ) }}
+            {{ form_errors(form.lname) }}
+            <label for="contact_lname">Last Name</label>
+        </div>
+
+        <div class="form-label-group">
+            {{ form_widget(form.email, {attr: {class: 'form-control', placeholder: 'Email',autocomplete: 'off'}} ) }}
+            {{ form_errors(form.email) }}
+            <label for="contact_email">Email</label>
+        </div>
+
+        <div class="form-label-group">
+            <input name="contact[recaptcha]" type="hidden" id="RECAPTCHA_{{ rand }}" value=""/>
+            {{ form_errors(form.recaptcha) }}
+        </div>
+
+        {#<div class="form-label-group">#}
+            {#{{ form_widget(form.recaptcha, {attr: {class: 'form-control', placeholder: 'Enter Capcha',autocomplete: 'off'}} ) }}#}
+            {#{{ form_errors(form.recaptcha) }}#}
+            {#<label for="contact_recaptcha"></label>#}
+        {#</div>#}
+
+        <button class="btn btn-lg btn-primary btn-block" name="contact[save]" id="contact_save" type="submit">Submit</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2021-2022</p>
+
+
+
+
+
+    </form>
+
+{% endblock %}
+
+{% block jscript %}
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action: 'contact'}).then(function(token) {
+                console.log(token);
+                document.getElementById("RECAPTCHA_{{ rand }}").value = token;
+            });
+        });
+    </script>
 {% endblock %}
