@@ -37,16 +37,10 @@ class ContactController extends AbstractController
      */
     public function index(Request $request)
     {
-
-        dump($request);
-
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-
-
-
             if ($form->isValid()){
                 $this->contactManager->create($form->getData());
             }

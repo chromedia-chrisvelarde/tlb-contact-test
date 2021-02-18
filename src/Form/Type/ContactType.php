@@ -49,18 +49,15 @@ class ContactType extends AbstractType
                 ],
                 'label' => false
             ])
+            ->add('recaptcha', TextType::class, [
+                'constraints' => [
+                    new Recaptcha(['action' => 'create_contact'])
+                ],
+                'mapped' => false
+            ])
         ;
 
-        $builder->add('recaptcha', TextType::class, [
-            'constraints' => [
-                new Recaptcha(['action' => 'contact'])
-            ],
-            'mapped' => false
-        ]);
-
-
         $builder->add('save', SubmitType::class);
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
