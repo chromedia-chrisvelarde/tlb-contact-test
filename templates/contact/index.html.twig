@@ -43,6 +43,11 @@
             <label for="contact_email">Email</label>
         </div>
 
+        <div class="form-group">
+            <label for="contact_message">Message</label>
+            {{ form_widget(form.message, {attr: {class: 'form-control', rows: '8', placeholder: 'Message',autocomplete: 'off'}} ) }}
+        </div>
+
         <div class="form-label-group">
             <input name="contact[recaptcha]" type="hidden" id="RECAPTCHA_{{ rand }}" value=""/>
             {{ form_errors(form.recaptcha) }}

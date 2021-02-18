@@ -44,6 +44,13 @@ class Contact
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @Serializer\Expose
+     * @Serializer\Groups({"Contact"})
+     */
+    private $message;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Serializer\Expose
      * @Serializer\Groups({"Contact"})
@@ -87,6 +94,18 @@ class Contact
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
 
         return $this;
     }

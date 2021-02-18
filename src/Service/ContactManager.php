@@ -70,6 +70,10 @@ class ContactManager extends BaseManager
             $contact->setEmail($params["email"]);
         }
 
+        if (isset($params["message"])) {
+            $contact->setMessage($params["message"]);
+        }
+
         return $contact;
     }
 
