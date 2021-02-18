@@ -35,28 +35,15 @@
             {{ form_errors(form.recaptcha) }}
         </div>
 
-        {#<div class="form-label-group">#}
-            {#{{ form_widget(form.recaptcha, {attr: {class: 'form-control', placeholder: 'Enter Capcha',autocomplete: 'off'}} ) }}#}
-            {#{{ form_errors(form.recaptcha) }}#}
-            {#<label for="contact_recaptcha"></label>#}
-        {#</div>#}
-
         <button class="btn btn-lg btn-primary btn-block" name="contact[save]" id="contact_save" type="submit">Submit</button>
         <p class="mt-5 mb-3 text-muted text-center">© 2021-2022</p>
-
-
-
-
-
-    </form>
 
 {% endblock %}
 
 {% block jscript %}
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action: 'contact'}).then(function(token) {
-                console.log(token);
+            grecaptcha.execute("{{ recaptcha_site_key }}", {action: 'create_contact'}).then(function(token) {
                 document.getElementById("RECAPTCHA_{{ rand }}").value = token;
             });
         });

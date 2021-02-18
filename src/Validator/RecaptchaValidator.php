@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class RecaptchaValidator extends ConstraintValidator
 {
+    const MINIMUM_SCORE = 0.6;
 
     /**
      * Checks if the passed value is valid.
@@ -37,18 +38,13 @@ class RecaptchaValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, 'string');
         }
 
-        $siteKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // TODO: Transfer to .env or .yaml file
-        $secretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"; // Sample only, TODO: Transfer to .env or .yaml file
-        $minScore = 0.5; // TODO: Transfer to .env or .yaml file
-
+        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
         $recaptchaRequest = "https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$value;
-        $captcha = json_decode(file_get_contents($recaptchaRequest), true);
+        $recaptcha = json_decode(file_get_contents($recaptchaRequest), true);
 
-        var_dump($captcha);
+        $isInvalidAction = empty($constraint->action) ? false : $recaptcha['action'] != $constraint->action;
 
-        $isInvalidAction = empty($constraint->action) ? false : $captcha['action'] != $constraint->action;
-
-        if ($captcha['success'] == false || (float) $captcha['score'] < $minScore || $isInvalidAction) {
+        if ($recaptcha['success'] == false || (float) $recaptcha['score'] < $this::MINIMUM_SCORE || $isInvalidAction) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
