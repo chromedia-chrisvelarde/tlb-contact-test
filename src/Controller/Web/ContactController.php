@@ -31,20 +31,12 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("", name="post_contact", methods={"POST"})
+     * @Route("", name="post_contact", methods={"GET","POST"})
      * @param Request $request
+     * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
-//        $contact = $this->contactManager->create(
-//            [
-//                'lname' => 'llano',
-//                'fname' => 'joel',
-//                'email' => 'joel.llano@chromedia.com'
-//            ]
-//        );
-
-
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
@@ -52,9 +44,21 @@ class ContactController extends AbstractController
             /** @var Contact $contact */
             $contact = new Contact();
             $validContact = $form->getData();
+
+            $contact = $this->contactManager->create(
+                [
+                    'lname' => 'llano',
+                    'fname' => 'joel',
+                    'email' => 'joel.llano@chromedia.com'
+                ]
+            );
         }
 
-        return new Response();
+        return $this->render('contact/index.html.twig',
+            [
+            'form' => $form->createView()
+            ]
+        );
 
     }
 

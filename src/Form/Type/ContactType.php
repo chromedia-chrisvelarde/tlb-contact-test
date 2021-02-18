@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ContactType extends AbstractType
 {
@@ -53,6 +54,9 @@ class ContactType extends AbstractType
                 ]
             ]);
         }
+
+        $builder->add('save', SubmitType::class);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
