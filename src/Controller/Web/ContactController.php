@@ -31,27 +31,25 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("", name="post_contact", methods={"GET","POST"})
+     * @Route("", name="_post_contact", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
     public function index(Request $request)
     {
+
+        dump($request);
+
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Contact $contact */
-            $contact = new Contact();
-            $validContact = $form->getData();
+        if ($form->isSubmitted()) {
 
-            $contact = $this->contactManager->create(
-                [
-                    'lname' => 'llano',
-                    'fname' => 'joel',
-                    'email' => 'joel.llano@chromedia.com'
-                ]
-            );
+
+
+            if ($form->isValid()){
+                $this->contactManager->create($form->getData());
+            }
         }
 
         return $this->render('contact/index.html.twig',

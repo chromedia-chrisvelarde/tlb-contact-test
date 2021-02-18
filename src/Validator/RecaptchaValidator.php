@@ -44,6 +44,8 @@ class RecaptchaValidator extends ConstraintValidator
         $recaptchaRequest = "https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$value;
         $captcha = json_decode(file_get_contents($recaptchaRequest), true);
 
+        var_dump($captcha);
+
         $isInvalidAction = empty($constraint->action) ? false : $captcha['action'] != $constraint->action;
 
         if ($captcha['success'] == false || (float) $captcha['score'] < $minScore || $isInvalidAction) {

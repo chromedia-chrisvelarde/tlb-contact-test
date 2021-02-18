@@ -3,19 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Test Application{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/floating-labels.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></script>
 </head>
 <body>
-<div id="sidebar">
-    {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog">Blog</a></li>
-        </ul>
-    {% endblock %}
-</div>
-
-<div id="content">
-    {% block body %}{% endblock %}
-</div>
+{% block body %}{% endblock %}
+{% block jscript %}{% endblock %}
 </body>
 </html>

@@ -30,30 +30,34 @@ class ContactType extends AbstractType
                     new Length([
                         'max' => 255
                     ])
-                ]
+                ],
+                'attr'=> array('class' => 'form-label-group'),
+                'label' => false
             ])
             ->add('lname', TextType::class, [
                 'constraints' => [
                     new Length([
                         'max' => 255
                     ])
-                ]
+                ],
+                'label' => false
             ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotNull(['message' => 'Email should not be blank.']),
                     new Email(['message' => 'Invalid Email format.']),
-                ]
+                ],
+                'label' => false
             ])
         ;
 
-        if (!empty($options['recaptchaAction'])) {
-            $builder->add('recaptcha', TextType::class, [
-                'constraints' => [
-                    new Recaptcha(['action' => $options['recaptchaAction']])
-                ]
-            ]);
-        }
+        $builder->add('recaptcha', TextType::class, [
+            'constraints' => [
+                new Recaptcha(['action' => 'contact'])
+            ],
+            'mapped' => false
+        ]);
+
 
         $builder->add('save', SubmitType::class);
 

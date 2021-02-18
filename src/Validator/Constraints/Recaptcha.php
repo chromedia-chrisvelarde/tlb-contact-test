@@ -17,11 +17,11 @@ class Recaptcha extends Constraint
 
     /**
      * Recaptcha constructor.
-     * @param mixed|null $options
+     * @param array|null $options
      * @param null $groups
      * @param mixed|null $payload
      */
-    public function __construct(?mixed $options = null, $groups = null, ?mixed $payload = null)
+    public function __construct(array $options = null, $groups = null, ?mixed $payload = null)
     {
         parent::__construct($options, $groups, $payload);
 
@@ -30,6 +30,6 @@ class Recaptcha extends Constraint
 
     public function validatedBy()
     {
-        return static::class.'Validator';
+        return 'App\Validator\RecaptchaValidator';
     }
 }
