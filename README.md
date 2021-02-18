@@ -63,9 +63,10 @@
 
 ## TODO
 - Add a script to initialize the whole initial setup for convenience
+- Add API Documentation e.g. swagger support
 
 ## Best Practices
-- Add Tests e.g. Unit Tests, API/Functional Tests
+- Add Automation Testing e.g. Unit Tests, API/Functional Tests ([Codeception supports](https://codeception.com/))
 
 
 
