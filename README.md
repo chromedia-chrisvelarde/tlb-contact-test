@@ -1,5 +1,9 @@
-# Contact Form
+# TLB Contact Form App
+for testing purposes only
 
+<img src="contact-page.png" width="400" />
+
+## Requirements
 - PHP 7.2
 - Symfony 5.2
 - MySQL
@@ -78,7 +82,8 @@
 - Api Documentations
     
     `http://127.0.0.1:8000/api/doc`
-
+    
+    <img src="api-doc.png"/>
 ## Mailer
 - We use (gmail ) 3rd party mailer transport for development only.
   > .env
