@@ -64,10 +64,20 @@
 - Api Documentations
     
     `http://127.0.0.1:8000/api/doc`
-    
-## TODO
-- Add a script to initialize the whole initial setup for convenience
 
+## Mailer
+- We use (gmail ) 3rd party mailer transport for development only.
+  > .env
+  
+  ```nashorn js
+  MAILER_DSN=gmail://USERNAME:PASSWORD@default
+  ```  
+  : make sure to Enable `Less Secure app access` in your Google account
+
+
+## TODO
+- Add a script to initialize the whole initial setup for convenience.
+- Setup Docker to automate the development and deployment process.
 
 ## Best Practices
 - Add Automation Testing e.g. Unit Tests, API/Functional Tests ([Codeception supports](https://codeception.com/))
