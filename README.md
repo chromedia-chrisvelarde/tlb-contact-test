@@ -61,9 +61,13 @@
     
     `GET http://127.0.0.1:8000/api/v1/contact`
 
+- Api Documentations
+    
+    `http://127.0.0.1:8000/api/doc`
+    
 ## TODO
 - Add a script to initialize the whole initial setup for convenience
-- Add API Documentation e.g. swagger support
+
 
 ## Best Practices
 - Add Automation Testing e.g. Unit Tests, API/Functional Tests ([Codeception supports](https://codeception.com/))

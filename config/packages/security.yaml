@@ -11,6 +11,9 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
+        api_doc:
+            pattern: ^/api/doc$
+            security: false
         api_token:
             pattern: ^/api/token$
             security: false

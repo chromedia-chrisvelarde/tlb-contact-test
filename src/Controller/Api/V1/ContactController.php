@@ -16,6 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
 
 /**
  * @FOSRest\Route("/api/v1/contact", name="contact")
@@ -39,7 +42,7 @@ class ContactController extends AbstractFOSRestController
     /**
      * Get Collection of Contacts
      *
-     * ### Response ###
+     * ### Sample Response ###
      * <pre><code>{
      *      "contacts": [
      *          {
@@ -56,6 +59,19 @@ class ContactController extends AbstractFOSRestController
      *          .
      *      ]
      *  }</code></pre>
+     *
+     * @OA\Tag(name="Contact")
+     * @Security(name="Bearer")
+     *
+     * @OA\Response(
+     *     response=200,
+     *     description="Returns the Collection of Contact",
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=Contact::class, groups={"full"}))
+     *     )
+     * )
+     *
      *
      * @FOSRest\Route("", name="get_contacts", methods={"GET"})
      * @FOSRest\View(serializerGroups={"Contact"})
