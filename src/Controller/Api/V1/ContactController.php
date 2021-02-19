@@ -8,6 +8,7 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Exception\MailerException;
 use App\Service\ContactManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,10 +74,9 @@ class ContactController extends AbstractFOSRestController
      * )
      *
      *
-     * @FOSRest\Route("", name="get_contacts", methods={"GET"})
+     * @FOSRest\Route("",methods={"GET"})
      * @FOSRest\View(serializerGroups={"Contact"})
      *
-     * @return Response
      *
      */
     public function cgetContacts()
@@ -84,5 +84,49 @@ class ContactController extends AbstractFOSRestController
         return $this->handleView($this->view([ 'contacts' => $this->contactManager->getAll()], Response::HTTP_OK));
     }
 
+    /**
+     * Create Contact.
+     *
+     * @FOSRest\RequestParam(
+     *      name="fname", nullable=false, strict=true, allowBlank=false,
+     *      description="First Name",
+     *  )
+     * @FOSRest\RequestParam(
+     *      name="lname", nullable=false, strict=true, allowBlank=false,
+     *      description="Last Name",
+     *  )
+     * @FOSRest\RequestParam(
+     *      name="email", nullable=false, strict=true, allowBlank=false,
+     *      description="Email Address",
+     *  )
+     * @FOSRest\RequestParam(
+     *      name="message", nullable=true, strict=true,
+     *      description="Message",
+     *  )
+     *
+     * @FOSRest\Route("", name="get_contacts", methods={"POST"})
+     *
+     * @param ParamFetcher $paramFetcher
+     *
+     * @OA\Tag(name="Contact")
+     * @Security(name="Bearer")
+     *
+     *
+     * @FOSRest\Route("", methods={"POST"})
+     * @FOSRest\View(serializerGroups={"Contact"})
+     *
+     */
+    public function create(ParamFetcher $paramFetcher)
+    {
+        $params = $paramFetcher->all();
+
+        try {
+            $this->contactManager->sendEmail($params)->create($params);
+        } catch (MailerException $e) {
+            return $this->handleView($this->view(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST));
+        }
+
+        return $this->handleView($this->view(Response::HTTP_CREATED));
+    }
 
 }

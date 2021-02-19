@@ -50,7 +50,6 @@
     ```sh
       curl -X POST \
         http://127.0.0.1:8000/token \
-        -H 'cache-control: no-cache' \
         -H 'content-type: application/x-www-form-urlencoded' \
         -d 'grant_type=client_credentials&client_id=<client_id>&client_secret=<client_secret>'
     ```
@@ -59,8 +58,23 @@
     
     > Fetch collection of contacts
     
-    `GET http://127.0.0.1:8000/api/v1/contact`
-
+        GET /api/v1/contact HTTP/1.1
+        Host: 127.0.0.1:8000
+        Authorization: Bearer <token>
+    
+    > Create Contact
+        
+        POST /api/v1/contact HTTP/1.1
+        Host: 127.0.0.1:8000
+        Authorization: Bearer <token>
+        Content-Type: application/json
+        {
+            "fname": "string",
+            "lname": "string",
+            "email": "string",
+            "message": "string"
+        }
+    
 - Api Documentations
     
     `http://127.0.0.1:8000/api/doc`
