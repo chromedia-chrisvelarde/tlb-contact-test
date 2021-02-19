@@ -50,7 +50,7 @@ class ContactController extends AbstractController
                 }
 
                 if (null != $contact) {
-                    $this->addFlash('success', "Contact Sent!");
+                    $this->addFlash('success', "Message Sent!");
                     return $this->redirectToRoute('contact_post_contact');
                 }
 

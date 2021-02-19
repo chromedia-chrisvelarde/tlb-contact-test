@@ -96,18 +96,29 @@ class ContactManager extends BaseManager
      */
     public function sendEmail(array $params) : ContactManager
     {
-        $email = (new TemplatedEmail())
-            ->from($params['email'])
+        $admin = (new TemplatedEmail())
+            ->from(new Address($params['email']))
             ->to(new Address($_ENV['EMAIL_CONTACT_TO']))
-            ->subject($_ENV['EMAIL_CONTACT_SUBJECT'])
-            ->htmlTemplate($_ENV['EMAIL_CONTACT_TEMPLATE'])
+            ->subject("Newly Submitted Contact")
+            ->htmlTemplate("emails/admin_copy_contact.html.twig")
+            ->context([
+                'contact' => $params,
+            ])
+        ;
+
+        $user = (new TemplatedEmail())
+            ->from(new Address($_ENV['EMAIL_CONTACT_TO']))
+            ->to(new Address($params['email']))
+            ->subject("Newly Submitted Contact - User's Copy")
+            ->htmlTemplate("emails/user_copy_contact.html.twig")
             ->context([
                 'contact' => $params,
             ])
         ;
 
         try {
-            $this->mailer->send($email);
+            $this->mailer->send($admin);
+            $this->mailer->send($user);
         } catch (TransportExceptionInterface $e) {
             throw MailerException::transportFails($e->getCode());
         }

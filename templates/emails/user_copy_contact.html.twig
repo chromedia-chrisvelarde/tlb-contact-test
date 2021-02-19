@@ -1,0 +1,28 @@
+Hi {{ contact.fname }},
+
+<p>
+Thanks for contacting us!
+</p>
+<p>
+Here is a copy of your message.
+</p>
+
+<h3>Contact Person</h3>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{ contact.fname }} {{ contact.lname }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ contact.email }}</td>
+    </tr>
+    <tr>
+        <td>Message</td>
+        <td>{{ contact.message }}</td>
+    </tr>
+</table>
+
+<p>
+The Admin Team
+</p>
