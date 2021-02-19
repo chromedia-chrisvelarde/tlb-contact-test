@@ -44,8 +44,7 @@ class ContactController extends AbstractController
                 $formData = $form->getData();
                 $contact = null;
                 try {
-                    //$contact = $this->contactManager->sendEmail($formData)->create($formData);
-                    $contact = $this->contactManager->create($formData);
+                    $contact = $this->contactManager->sendEmail($formData)->create($formData);
                 } catch (MailerException $e) {
                     $this->addFlash('error', "Error Sending Email: {$e->getMessage()}");
                 }
