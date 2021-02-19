@@ -93,6 +93,15 @@ for testing purposes only
   ```  
   : make sure to Enable `Less Secure app access` in your Google account
 
+## ReCAPTCHA
+We use ReCaptcha V3 for this app. To use it:
+ - Register your site on reCAPTCHA [here](https://www.google.com/recaptcha/admin/create) to get the `SITE_KEY` and `SECRET_KEY`
+    1) Create a google account if you don't have one yet
+    2) Select `v3` reCAPTCHA type
+    3) Add the domain name of the application (Do not add https:// or http:// before the name, as well as any protocol, path, port, query or fragment after it)
+    4) Submit the registration and copy the generated keys.
+ - Replace `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` in the `.env` file with the appropriate generated keys
+ - For more information, visit the [documentation](https://developers.google.com/recaptcha/docs/v3)
 
 ## TODO
 - Add a script to initialize the whole initial setup for convenience.
