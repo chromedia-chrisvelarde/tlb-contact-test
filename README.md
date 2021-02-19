@@ -89,7 +89,7 @@ for testing purposes only
   > .env
   
   ```nashorn js
-  MAILER_DSN=gmail://USERNAME:PASSWORD@default
+  MAILER_DSN=gmail+smtp://USERNAME:PASSWORD@default
   ```  
   : make sure to Enable `Less Secure app access` in your Google account
 
